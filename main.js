@@ -6,12 +6,12 @@ var deck = [{ name: "D", type: "Dragon", Cost: 10, Attack: 20, Defence: 5, Speed
 { name: "E", type: "Elf", Cost: 10, Attack: 15, Defence: 5, Speed: 25 },
 { name: "F", type: "Human", Cost: 5, Attack: 15, Defence: 10, Speed: 15 }];
 var limit = 30;
-
-cardsLink = document.getElementsByClassName("card");
-for (var i = 0; i< cardsLink.length; i++){
-	dragElement(cardsLink[i]);
+function dragging() {
+	cardsLink = document.getElementsByClassName("card draggable");
+	for (var i = 0; i < cardsLink.length; i++) {
+		dragElement(cardsLink[i]);
+	}
 }
-
 
 function dragElement(elmnt) {
 	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -115,7 +115,7 @@ function renderDeck()
 
 function load()
 {
-	
+	dragging();
 	shuffle();
 	renderCards();
 	renderDeck();
