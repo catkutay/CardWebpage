@@ -1,0 +1,96 @@
+
+.board{
+		display: flex;
+}
+.display{
+	width: 20%;
+	margin: 20px auto;
+		background: rgb(30, 255, 113);
+		border: solid 10px black;
+		padding: 10px;
+		border-radius: 10px;
+		text-align: center;
+		color: white;
+}
+.deck
+{
+	width:40%;
+
+	margin: 20px auto;
+	background:dodgerblue;
+	border:solid 10px black;
+	padding: 10px;
+	border-radius:10px;
+	text-align: center;
+	color:white;
+}
+#cards {
+	width: 30%;
+
+	margin: 20px auto;
+	background: rgb(255, 30, 30);
+	border: solid 10px black;
+	padding: 10px;
+	border-radius: 10px;
+	text-align: center;
+	color: white;
+}
+
+.card
+{
+	padding: 10px;
+	border: solid 3px #808080;
+	background-color: white;
+	display: inline-block;
+	border-radius: 10px;
+	font-size: 14pt;
+	text-align: center;
+	color:black;
+	margin: 3px;
+}
+
+.btn
+{
+	background:white;
+	padding: 10px 20px;
+	border-radius:30px;
+	margin: 10px;
+	display:inline-block;
+}
+
+.card .name{
+	font-size:15pt;
+	font-family: sans-serif;
+}
+
+.card .typeDragon
+{
+	background-image: url('images/dragon.jpeg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100px;
+	width: 90px;
+}
+.card .typeHuman {
+	background-image: url('images/human.jpeg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100px;
+	width: 90px;
+}
+.card .typeElf {
+	background-image: url('images/elf.jpeg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 100px;
+	width: 90px;
+}
+
+.draggable{
+	
+	box-shadow: 0 0 10px rgb(114, 111, 111) inset;
+}
+
+
+                
+            
