@@ -86,8 +86,8 @@
 	width: 90px;
 }
 
-.draggable{
-	
+.card .draggable{
+	position: absolute;
 	box-shadow: 0 0 10px rgb(114, 111, 111) inset;
 }
 
