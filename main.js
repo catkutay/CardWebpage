@@ -6,52 +6,37 @@ var deck = [{ name: "D", type: "Dragon", Cost: 10, Attack: 20, Defence: 5, Speed
 { name: "E", type: "Elf", Cost: 10, Attack: 15, Defence: 5, Speed: 25 },
 { name: "F", type: "Human", Cost: 5, Attack: 15, Defence: 10, Speed: 15 }];
 var limit = 30;
-function dragging() {
-	cardsLink = document.getElementsByClassName("card draggable");
-	for (var i = 0; i < cardsLink.length; i++) {
-		dragElement(cardsLink[i]);
-	}
+
+function allowDrop(ev) {
+  ev.preventDefault();
 }
 
-function dragElement(elmnt) {
-	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-	if (document.getElementById("name")) {
-		// if present, the header is where you move the DIV from:
-		document.getElementById("name").onmousedown = dragMouseDown;
-	} else {
-		// otherwise, move the DIV from anywhere inside the DIV:
-		elmnt.onmousedown = dragMouseDown;
+function drag(ev) {
+	ev.dataTransfer.setData("text/plain", ev.target.name);
+
+}
+
+function drop(ev) {
+  ev.preventDefault();
+	var data = ev.dataTransfer.getData("text/plain");
+	
+	for (var i = 0; i < cards.length; i++){
+		
+		if (cards[i]["name"] == data) {
+			deck.push(cards[i]);
+			cards = cards.filter(function (item) {
+				return item !== cards[i];
+			});
+			
+			break;
+		}
+		
 	}
 
-	function dragMouseDown(e) {
-		e = e || window.event;
-		e.preventDefault();
-		// get the mouse cursor position at startup:
-		pos3 = e.clientX;
-		pos4 = e.clientY;
-		document.onmouseup = closeDragElement;
-		// call a function whenever the cursor moves:
-		document.onmousemove = elementDrag;
-	}
-
-	function elementDrag(e) {
-		e = e || window.event;
-		e.preventDefault();
-		// calculate the new cursor position:
-		pos1 = pos3 - e.clientX;
-		pos2 = pos4 - e.clientY;
-		pos3 = e.clientX;
-		pos4 = e.clientY;
-		// set the element's new position:
-		elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-		elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-	}
-
-	function closeDragElement() {
-		// stop moving when mouse button is released:
-		document.onmouseup = null;
-		document.onmousemove = null;
-	}
+	console.log(deck);
+	renderDeck();
+	renderCards();
+	
 }
 
 function renderCards()
@@ -63,6 +48,10 @@ function renderCards()
 		var name = document.createElement("div");
 		var type = document.createElement("div");
 		card.className = "card";
+		card.name=cards[i].name;
+		//set as draggable
+		card.draggable = "true"
+		card.setAttribute('ondragstart', 'drag(event)');
 		name.className = "name";
 		type.className = "type" + cards[i].type;
 
@@ -91,11 +80,10 @@ function shuffle()
 	renderDeck();
 }
 
-function renderDeck()
-{
+function renderDeck() {
+
 	document.getElementById('deck').innerHTML = '';
-	for(var i = 0; i < deck.length; i++)
-	{
+	for (var i = 0; i < deck.length; i++) {
 		var card = document.createElement("div");
 		var name = document.createElement("div");
 		var type = document.createElement("div");
@@ -110,15 +98,33 @@ function renderDeck()
 
 		document.getElementById("deck").appendChild(card);
 	}
-}
+	//add others as empty bu drop target
 
+	for (var i = 0; i < limit - deck.length; i++) {
+		var card = document.createElement("div");
+		var name = document.createElement("div");
+		var type = document.createElement("div");
+		card.className = "card";
+		name.className = "name";
+		type.className = "typeUnknown";
+		card.setAttribute('ondrop', 'drop(event)');
+		card.setAttribute('ondragover', 'allowDrop(event)');
+		name.innerHTML = "Unknown";
+		card.appendChild(name);
+		card.appendChild(type);
+		card.classList.add("draggable")
+
+		document.getElementById("deck").appendChild(card);
+	}
+}
 
 function load()
 {
-	dragging();
+	
 	shuffle();
 	renderCards();
 	renderDeck();
+
 }
 
 window.onload = load;
