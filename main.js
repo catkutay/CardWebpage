@@ -1,10 +1,10 @@
-var cards = [{ name: "A", type: "Dragon", Cost: 15, Attack: 30, Defence: 5, Speed: 15 },
+var cards = [{ name: "A", type: "Dragon", Cost: 15, attkac: 30, Defence: 5, Speed: 15 },
 { name: "B", type: "Human", Cost: 5, Attack: 10, Defence: 15, Speed: 15 },
 	{ name: "C", type: "Elf", Cost: 10, Attack: 10, Defence: 5, Speed: 20 }];
 
-var deck = [{ name: "D", type: "Dragon", Cost: 10, Attack: 20, Defence: 5, Speed: 15 },
-{ name: "E", type: "Elf", Cost: 10, Attack: 15, Defence: 5, Speed: 25 },
-{ name: "F", type: "Human", Cost: 5, Attack: 15, Defence: 10, Speed: 15 }];
+var deck = [{ name: "D", type: "Dragon", cost: 10, attack: 20, defence: 5, speed: 15 },
+{ name: "E", type: "Elf", cost: 10, attack: 15, defence: 5, speed: 25 },
+{ name: "F", type: "Human", cost: 5, attack: 15, defence: 10, speed: 15 }];
 var limit = 30;
 
 function allowDrop(ev) {
@@ -47,6 +47,7 @@ function renderCards()
 		var card = document.createElement("div");
 		var name = document.createElement("div");
 		var type = document.createElement("div");
+		var attack = document.createElement("div");
 		card.className = "card";
 		card.name=cards[i].name;
 		//set as draggable
@@ -54,10 +55,12 @@ function renderCards()
 		card.setAttribute('ondragstart', 'drag(event)');
 		name.className = "name";
 		type.className = "type" + cards[i].type;
-
+		attack.className = "attack";
 		name.innerHTML = cards[i].name;
+		attack.innerHTML = cards[i].attack;
 		card.appendChild(name);
 		card.appendChild(type);
+		card.appendChild(attack);
 		card.classList.add("draggable")
 
 		document.getElementById("cards").appendChild(card);
@@ -87,14 +90,17 @@ function renderDeck() {
 		var card = document.createElement("div");
 		var name = document.createElement("div");
 		var type = document.createElement("div");
+		var attack = document.createElement("div");
 		card.className = "card";
 		name.className = "name";
 		type.className = "type" + deck[i].type;
-
+		attack.className = "attack";
+		
+		attack.innerHTML = deck[i].attack;
 		name.innerHTML = deck[i].name;
 		card.appendChild(name);
 		card.appendChild(type);
-		card.classList.add("draggable")
+		card.appendChild(attack);
 
 		document.getElementById("deck").appendChild(card);
 	}
@@ -104,14 +110,18 @@ function renderDeck() {
 		var card = document.createElement("div");
 		var name = document.createElement("div");
 		var type = document.createElement("div");
+		var attack = document.createElement("div");
 		card.className = "card";
 		name.className = "name";
 		type.className = "typeUnknown";
+		attack.className = "attack";
+		card.appendChild(attack);
 		card.setAttribute('ondrop', 'drop(event)');
 		card.setAttribute('ondragover', 'allowDrop(event)');
 		name.innerHTML = "Unknown";
 		card.appendChild(name);
 		card.appendChild(type);
+		card.appendChild(attack);
 		card.classList.add("draggable")
 
 		document.getElementById("deck").appendChild(card);
