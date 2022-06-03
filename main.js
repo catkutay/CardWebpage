@@ -1,12 +1,12 @@
 //samples 
 
-var cards = [{ name: "A", type: "Dragon", cost: 15, attack: 30, defence: 5, speed: 15 },
-{ name: "B", type: "Human", cost: 5, attack: 10, defence: 15, speed: 15 },
-	{ name: "C", type: "Elf", cost: 10, attack: 10, defence: 5, speed: 20 }];
+var cards = [{ name: "A", type: "Dragon", energy: 15, power: 30, toughness: 5, speed: 15 },
+{ name: "B", type: "Human", energy: 5, power: 10, toughness: 15, speed: 15 },
+	{ name: "C", type: "Elf", energy: 10, power: 10, toughness: 5, speed: 20 }];
 
-var deck = [{ name: "D", type: "Dragon", cost: 10, attack: 20, defence: 5, speed: 15 },
-{ name: "E", type: "Elf", cost: 10, attack: 15, defence: 5, speed: 25 },
-{ name: "F", type: "Human", cost: 5, attack: 15, defence: 10, speed: 15 }];
+var deck = [{ name: "D", type: "Dragon", energy: 10, power: 20, toughness: 5, speed: 15 },
+{ name: "E", type: "Elf", energy: 10, power: 15, toughness: 5, speed: 25 },
+{ name: "F", type: "Human", energy: 5, power: 15, toughness: 10, speed: 15 }];
 //max number of cards in deck
 var limit = 30;
 
@@ -28,54 +28,110 @@ function drop(ev) {
 		if (cards[i]["name"] == data) {
 			//move card to deck
 			deck.push(cards[i]);
-			cards = cards.filter(function (item) {
-				return item !== cards[i];
-			});
-			
+			cards.splice(i, 1);
+			//display on left
+			renderCards("display", cards[i]);
 			break;
 		}
 		
 	}
 
-	console.log(deck);
-	renderDeck();
-	renderCards();
+	/*renderCards("deck",deck);
+	renderCards("cards", cards);*/
+	
+	
 	
 }
 
-function renderCards()
+function renderCards(id, stackCards)
 {
-	//cards available to add
-	document.getElementById('cards').innerHTML = '';
-	for(var i = 0; i < cards.length; i++)
-	{
+	
+	//cards available to add are StackCards
+
+	var segment = document.getElementById(id)
+		segment.innerHTML = '';
+	console.log(segment);
+	for (var i = 0; i < stackCards.length; i++) {
 		//set up areas in card
 		var card = document.createElement("div");
+		var gridTop = document.createElement("div");
 		var name = document.createElement("div");
+		var energy = document.createElement("div");
 		var type = document.createElement("div");
-		var attack = document.createElement("div");
+		var gridBottom = document.createElement("div");
+		var power = document.createElement("div");
+		var toughness = document.createElement("div");
+		var speed = document.createElement("div");
 		//put class names
 		card.className = "card";
 		//set name to pick up on event handler
-		card.name=cards[i].name;
+		card.name = stackCards[i].name;
 		//set as draggable
-		card.draggable = "true"
+		card.draggable = "true";
 		//add draggable
 		card.setAttribute('ondragstart', 'drag(event)');
-		name.className = "name";
-		type.className = "type" + cards[i].type;
-		attack.className = "attack";
+		gridTop.className = "grid-container";
+		energy.className = "grid-child energy";
+		name.className = "grid-child name";
+		type.className = "type" + stackCards[i].type;
+		gridBottom.className = "grid-container2";
+		power.className = "grid-child power";
+		toughness.className = "grid-child toughness";
+		speed.className = "grid-child speed";
 		///put in text
-		name.innerHTML = cards[i].name;
-		attack.innerHTML = cards[i].attack;
+		energy.innerHTML = stackCards[i].energy;
+		name.innerHTML = stackCards[i].name;
+		power.innerHTML = stackCards[i].power;
+		toughness.innerHTML = stackCards[i].toughness;
+		speed.innerHTML == stackCards[i].speed;
+		console.log(speed);
 		//add to card
-		card.appendChild(name);
+		gridTop.appendChild(name);
+		gridTop.appendChild(energy);
+		
+		card.appendChild(gridTop);
 		card.appendChild(type);
-		card.appendChild(attack);
-		card.classList.add("draggable")
-
-		document.getElementById("cards").appendChild(card);
+		
+		gridBottom.appendChild(power);
+		gridBottom.appendChild(toughness);
+		gridBottom.appendChild(speed);
+		card.appendChild(gridBottom);
+		segment.appendChild(card);
+		if (id == "cards") card.classList.add("draggable")
 	}
+		if (id == "deck"){
+			for (var i = 0; i < limit - stackCards.length; i++) {
+				var card = document.createElement("div");
+				var energy = document.createElement("div");
+				var name = document.createElement("div");
+				var type = document.createElement("div");
+				var power = document.createElement("div");
+				var toughness = document.createElement("div");
+				var speed = document.createElement("div");
+				card.className = "card";
+				name.className = "name";
+				type.className = "unknown";
+				energy.className = "energy";
+				power.className = "power";
+				toughness.className = "toughness";
+				speed.className = "speed";
+				
+				card.setAttribute('ondrop', 'drop(event)');
+				card.setAttribute('ondragover', 'allowDrop(event)');
+				
+
+				name.innerHTML = "";
+				
+				
+				card.appendChild(name);
+				segment.appendChild(card);
+				
+			}
+			
+		}
+	
+		
+	
 }
 function shuffle()
 {
@@ -91,63 +147,17 @@ function shuffle()
 		deck[location2] = tmp;
 	}
 
-	renderDeck();
-}
-
-function renderDeck() {
-//cards selected
-	document.getElementById('deck').innerHTML = '';
-	for (var i = 0; i < deck.length; i++) {
-		//card divs
-		var card = document.createElement("div");
-		var name = document.createElement("div");
-		var type = document.createElement("div");
-		var attack = document.createElement("div");
-		//className divs
-		card.className = "card";
-		name.className = "name";
-		type.className = "type" + deck[i].type;
-		attack.className = "attack";
-		//text in divs
-		attack.innerHTML = deck[i].attack;
-		name.innerHTML = deck[i].name;
-		//add to card
-		card.appendChild(name);
-		card.appendChild(type);
-		card.appendChild(attack);
-
-		document.getElementById("deck").appendChild(card);
-	}
-	//add others as empty for drop target
-
-	for (var i = 0; i < limit - deck.length; i++) {
-		var card = document.createElement("div");
-		var name = document.createElement("div");
-		var type = document.createElement("div");
-		var attack = document.createElement("div");
-		card.className = "card";
-		name.className = "name";
-		type.className = "typeUnknown";
-		attack.className = "attack";
-		card.appendChild(attack);
-		card.setAttribute('ondrop', 'drop(event)');
-		card.setAttribute('ondragover', 'allowDrop(event)');
-		name.innerHTML = "Unknown";
-		card.appendChild(name);
-		card.appendChild(type);
-		card.appendChild(attack);
-		card.classList.add("draggable")
-
-		document.getElementById("deck").appendChild(card);
-	}
+	renderCards("deck",deck);
 }
 
 function load()
 {
 	//set up scene
 	shuffle();
-	renderCards();
-	renderDeck();
+	renderCards("cards",cards);
+	renderCards("deck", deck);
+	//display default 
+    renderCards("display", cards[0]);
 
 }
 

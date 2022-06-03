@@ -3,13 +3,13 @@
 		display: flex;
 }
 .display{
-	/*single cardd display*/
+	/*single card display*/
 	width: 20%;
-	margin: 10px auto;
-		background: rgb(30, 255, 113);
+	margin: 0px auto;
+		background: #429a39;
 		border: solid 5px black;
 		padding: 5px;
-		border-radius: 10px;
+		
 		text-align: center;
 		color: white;
 }
@@ -18,11 +18,11 @@
 	/*those selected already*/
 	width:50%;
 
-	margin: 10px auto;
-	background:dodgerblue;
-	border:solid 5px black;
-	padding: 5px;
-	border-radius:10px;
+	margin: 0px auto;
+	background:#333c87;
+	border:solid 10px black;
+	padding: 0px;
+	
 	text-align: center;
 	color:white;
 }
@@ -31,10 +31,10 @@
 	/*those to be selected*/
 	width: 20%;
 	margin: 10px auto;
-	background: rgb(255, 30, 30);
-	border: solid 5px black;
-	padding: 5px;
-	border-radius: 10px;
+	background: #890f0f;
+	border: solid 10px black;
+	padding: 0px;
+	/*border-radius: 10px;*/
 	text-align: center;
 	color: white;
 }
@@ -42,56 +42,115 @@
 .card
 {
 	/*each card*/
-	padding: 5px;
-	border: solid 2px #808080;
+	padding: 0px;
+	border: solid 5px #050404;
 	background-color: white;
 	display: inline-block;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	font-size: 14pt;
 	text-align: center;
 	color:black;
-	margin: 3px;
+	margin: 0px;
 	width: 100px;
 	height: 150px;
 }
+.display .card{
+		padding: 0px;
+			border: solid 5px #050404;
+			background-color: white;
+			display: inline-block;
+			/*border-radius: 10px;*/
+			font-size: 14pt;
+			text-align: center;
+			color: black;
+			margin: 0px;
+			width: 150px;
+			height: 200px;
+}
 
-.card .name{
+.card .name  .energy .toughness .power .speed{
 	font-size:15pt;
 	font-family: sans-serif;
+	height: 25px;
+	
 }
-.card .attack {
-	font-size: 10pt;
-	font-family: sans-serif;
+.card .name {
+	width: 90px;
+	background-color: #989898;
+	grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-start: 1;
+	height: 20px;
 }
+.card .energy {
+width: 25px;
+
+	background-color: #a19536;
+	grid-area: 1 / 1 ;
+}
+.card .power {
+	width: 25px;
+	background-color:#890f0f;
+}
+.card .toughness {
+	width: 25px;
+	background-color: #333c87;
+}
+
+.card .speed {
+	width: 25px;
+	background-color: #429a39;
+}
+
 
 .card .typeDragon
 {
 	background-image: url('images/dragon.jpeg');
 	background-size: 100%;
 	background-repeat: no-repeat;
-	height: 100px;
-	width: 90px;
+	height: 77px;
+	max-width: 80px;
+	
+	margin: 10px;
+	border: solid 5px black;
 }
 .card .typeHuman {
 	background-image: url('images/human.jpeg');
 	background-size: 100%;
-	background-repeat: no-repeat;
-	height: 100px;
-	width: 90px;
+		background-repeat: no-repeat;
+		height: 77px;
+		max-width: 80px;
+	
+		margin: 10px;
+		border: solid 5px black;
 }
 .card .typeElf {
 	background-image: url('images/elf.jpeg');
 	background-size: 100%;
-	background-repeat: no-repeat;
-	height: 100px;
-	width: 90px;
+		background-repeat: no-repeat;
+		height: 77px;
+		max-width: 80px;
+	
+		margin: 10px;
+		border: solid 5px black;
 }
 
 .card .draggable{
 	position: absolute;
 	box-shadow: 0 0 10px rgb(114, 111, 111) inset;
 }
+.grid-container {
+	display: grid;
 
+	grid-template-columns: 1fr 10fr;
+	align-items: start;
+	grid-gap: 0px;
+}
+.grid-container2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 13px;
+}
 
                 
             
