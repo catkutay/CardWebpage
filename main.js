@@ -1,12 +1,12 @@
 //samples 
 
-var cards = [{ name: "A", type: "dragon", energy: 15, power: 30, toughness: 5, speed: 15 },
-{ name: "B", type: "human", energy: 5, power: 10, toughness: 15, speed: 15 },
-	{ name: "C", type: "elf", energy: 10, power: 10, toughness: 5, speed: 20 }];
+var cards = [{ name: "A", type: "dragon", energy: 15, power: 30, toughness: 5, speed: 15, },
+{ name: "B", type: "human", energy: 5, power: 10, toughness: 15, speed: 15, },
+	{ name: "C", type: "elf", energy: 10, power: 10, toughness: 5, speed: 20, }];
 
-var deck = [{ name: "D", type: "dragon", energy: 10, power: 20, toughness: 5, speed: 15 },
-{ name: "E", type: "elf", energy: 10, power: 15, toughness: 5, speed: 25 },
-{ name: "F", type: "human", energy: 5, power: 15, toughness: 10, speed: 15 }];
+var deck = [{ name: "D", type: "dragon", energy: 10, power: 20, toughness: 5, speed: 15, },
+{ name: "E", type: "elf", energy: 10, power: 15, toughness: 5, speed: 25, },
+{ name: "F", type: "human", energy: 5, power: 15, toughness: 10, speed: 15, }];
 //max number of cards in deck
 var limit = 30;
 
@@ -95,8 +95,8 @@ function renderCards(id, stackCards)
 		power.innerHTML = stackCards[i].power;
 		toughness.innerHTML = stackCards[i].toughness;
 		//FIXME not showing
-		speed.innerHTML == stackCards[i].speed;
-		//console.log(speed,stackCards[i].speed);
+		speed.innerHTML =stackCards[i].speed;
+		
 		//add to card
 		gridTop.appendChild(name);
 		gridTop.appendChild(energy);
