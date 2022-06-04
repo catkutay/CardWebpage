@@ -1,12 +1,12 @@
 //samples 
 
-var cards = [{ name: "A", type: "Dragon", energy: 15, power: 30, toughness: 5, speed: 15 },
-{ name: "B", type: "Human", energy: 5, power: 10, toughness: 15, speed: 15 },
-	{ name: "C", type: "Elf", energy: 10, power: 10, toughness: 5, speed: 20 }];
+var cards = [{ name: "A", type: "dragon", energy: 15, power: 30, toughness: 5, speed: 15 },
+{ name: "B", type: "human", energy: 5, power: 10, toughness: 15, speed: 15 },
+	{ name: "C", type: "elf", energy: 10, power: 10, toughness: 5, speed: 20 }];
 
-var deck = [{ name: "D", type: "Dragon", energy: 10, power: 20, toughness: 5, speed: 15 },
-{ name: "E", type: "Elf", energy: 10, power: 15, toughness: 5, speed: 25 },
-{ name: "F", type: "Human", energy: 5, power: 15, toughness: 10, speed: 15 }];
+var deck = [{ name: "D", type: "dragon", energy: 10, power: 20, toughness: 5, speed: 15 },
+{ name: "E", type: "elf", energy: 10, power: 15, toughness: 5, speed: 25 },
+{ name: "F", type: "human", energy: 5, power: 15, toughness: 10, speed: 15 }];
 //max number of cards in deck
 var limit = 30;
 
@@ -49,10 +49,11 @@ function renderCards(id, stackCards)
 	//cards available to add are StackCards
 
 	var segment = document.getElementById(id)
-		segment.innerHTML = '';
-	console.log(segment);
+	segment.innerHTML = '';
+	
 	for (var i = 0; i < stackCards.length; i++) {
 		//set up areas in card
+		
 		var card = document.createElement("div");
 		var gridTop = document.createElement("div");
 		var name = document.createElement("div");
@@ -73,7 +74,8 @@ function renderCards(id, stackCards)
 		gridTop.className = "grid-container";
 		energy.className = "grid-child energy";
 		name.className = "grid-child name";
-		type.className = "type" + stackCards[i].type;
+		type.className = "type"
+		type.id=stackCards[i].type;
 		gridBottom.className = "grid-container2";
 		power.className = "grid-child power";
 		toughness.className = "grid-child toughness";
@@ -83,8 +85,9 @@ function renderCards(id, stackCards)
 		name.innerHTML = stackCards[i].name;
 		power.innerHTML = stackCards[i].power;
 		toughness.innerHTML = stackCards[i].toughness;
+		//FIXME not showing
 		speed.innerHTML == stackCards[i].speed;
-		console.log(speed);
+		//console.log(speed,stackCards[i].speed);
 		//add to card
 		gridTop.appendChild(name);
 		gridTop.appendChild(energy);
@@ -97,6 +100,7 @@ function renderCards(id, stackCards)
 		gridBottom.appendChild(speed);
 		card.appendChild(gridBottom);
 		segment.appendChild(card);
+		
 		if (id == "cards") card.classList.add("draggable")
 	}
 		if (id == "deck"){
@@ -147,17 +151,19 @@ function shuffle()
 		deck[location2] = tmp;
 	}
 
-	renderCards("deck",deck);
+	//renderCards("deck",deck);
 }
 
 function load()
 {
 	//set up scene
+	
+	renderCards("display", [cards[0]]);
+	renderCards("cards", cards);
 	shuffle();
-	renderCards("cards",cards);
 	renderCards("deck", deck);
 	//display default 
-    renderCards("display", cards[0]);
+   
 
 }
 

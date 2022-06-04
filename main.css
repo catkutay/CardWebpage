@@ -50,7 +50,7 @@
 	font-size: 14pt;
 	text-align: center;
 	color:black;
-	margin: 0px;
+	margin: 5px;
 	width: 100px;
 	height: 150px;
 }
@@ -64,11 +64,69 @@
 			text-align: center;
 			color: black;
 			margin: 0px;
-			width: 150px;
-			height: 200px;
+			width: 90%;
+			height: 255px;
 }
 
-.card .name  .energy .toughness .power .speed{
+
+
+.display .card .name .energy .toughness .power .speed {
+	font-size: 20pt;
+	font-family: sans-serif;
+	
+
+}
+.display .card .name {
+	width: 140px;
+	background-color: #989898;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 1;
+	height: 30px;
+}
+.display .card .energy {
+	width: 38px;
+height: 40px;
+	background-color: #a19536;
+	grid-area: 1 / 1;
+}
+
+.display .card .power {
+	width: 38px;
+	height: 40px;
+	background-color: #890f0f;
+}
+
+.display .card .toughness {
+	width: 38px;
+	height: 40px;
+	background-color: #333c87;
+}
+
+.display .card .speed {
+	width: 38px;
+	height: 40px;
+	background-color: #429a39;
+}
+.display .card .type {
+
+	background-size: 100%;
+	background-repeat: no-repeat;
+	min-height: 145px;
+	max-width: 90%;
+
+	margin: 10px;
+	border: solid 5px black;
+}
+
+
+
+.display .grid-container2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 25%;
+}
+.card .name  .energy .toughness .power .speed {
 	font-size:15pt;
 	font-family: sans-serif;
 	height: 25px;
@@ -101,38 +159,29 @@ width: 25px;
 	width: 25px;
 	background-color: #429a39;
 }
+.card .type  {
 
-
-.card .typeDragon
-{
-	background-image: url('images/dragon.jpeg');
 	background-size: 100%;
 	background-repeat: no-repeat;
 	height: 77px;
 	max-width: 80px;
-	
+
 	margin: 10px;
 	border: solid 5px black;
 }
-.card .typeHuman {
-	background-image: url('images/human.jpeg');
-	background-size: 100%;
-		background-repeat: no-repeat;
-		height: 77px;
-		max-width: 80px;
+
+#dragon
+{
+	background-image: url('images/dragon.jpeg');
 	
-		margin: 10px;
-		border: solid 5px black;
 }
-.card .typeElf {
-	background-image: url('images/elf.jpeg');
-	background-size: 100%;
-		background-repeat: no-repeat;
-		height: 77px;
-		max-width: 80px;
+#human {
+	background-image: url('images/human.jpeg');
 	
-		margin: 10px;
-		border: solid 5px black;
+}
+#elf {
+	background-image: url('images/elf.jpeg');
+	
 }
 
 .card .draggable{
