@@ -11,33 +11,41 @@ var deck = [{ name: "D", type: "dragon", energy: 10, power: 20, toughness: 5, sp
 var limit = 30;
 
 function allowDrop(ev) {
+	
   ev.preventDefault();
 }
 
 function drag(ev) {
+	
 	ev.dataTransfer.setData("text/plain", ev.target.name);
 
 }
 
 function drop(ev) {
+	
   ev.preventDefault();
 	var data = ev.dataTransfer.getData("text/plain");
+	var dataId = 0;
 	//get moved card - name is shared in drag function
 	for (var i = 0; i < cards.length; i++){
 		
 		if (cards[i]["name"] == data) {
 			//move card to deck
+		
 			deck.push(cards[i]);
+				dataCard = cards[i];
 			cards.splice(i, 1);
 			//display on left
-			renderCards("display", cards[i]);
+		
+		
+			
 			break;
 		}
 		
 	}
-
-	/*renderCards("deck",deck);
-	renderCards("cards", cards);*/
+renderCards("display", [dataCard]);
+	renderCards("deck",deck);
+	renderCards("cards", cards);
 	
 	
 	
@@ -70,7 +78,8 @@ function renderCards(id, stackCards)
 		//set as draggable
 		card.draggable = "true";
 		//add draggable
-		card.setAttribute('ondragstart', 'drag(event)');
+		if (id == "cards") card.setAttribute('touchstart', 'drag(event)');
+		if(id=="cards")card.setAttribute('ondragstart', 'drag(event)');
 		gridTop.className = "grid-container";
 		energy.className = "grid-child energy";
 		name.className = "grid-child name";
@@ -120,9 +129,10 @@ function renderCards(id, stackCards)
 				toughness.className = "toughness";
 				speed.className = "speed";
 				
+				card.setAttribute('touchend', 'drop(event)');
+				card.setAttribute('touchmove', 'allowDrop(event)');
 				card.setAttribute('ondrop', 'drop(event)');
-				card.setAttribute('ondragover', 'allowDrop(event)');
-				
+				card.setAttribute('ondragover', 'allowDrop(event)');				
 
 				name.innerHTML = "";
 				
@@ -158,7 +168,7 @@ function load()
 {
 	//set up scene
 	
-	renderCards("display", [cards[0]]);
+	renderCards("display", [dataCard]);
 	renderCards("cards", cards);
 	shuffle();
 	renderCards("deck", deck);
@@ -168,3 +178,4 @@ function load()
 }
 
 window.onload = load;
+var dataCard = cards[0];
